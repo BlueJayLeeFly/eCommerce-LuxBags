@@ -99,9 +99,18 @@ footer {
 	margin-bottom: 30px;
 }
 
-.featured-collection {
+.featured-collection,
+.shop-collection {
 	padding-left: 10%;
 	padding-right: 10%;
+}
+
+.shop-collection {
+	margin-top: 100px;
+}
+
+.shop-collection h2 {
+	text-align: center;
 }
 
 .item-list {
