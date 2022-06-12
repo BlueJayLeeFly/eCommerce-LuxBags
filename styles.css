@@ -1,4 +1,95 @@
 /* Variables */
 :root {
 	--main-color: #0a0a0a;
+	--item-card-border-color: #dfdfdf;
+}
+
+/* General Styling - Start */
+/* Font */
+body {
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+	color: var(--main-color);
+	padding: 0;
+	margin: 0;
+}
+
+nav {
+	display: flex;
+	justify-content: space-around;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+a {
+	text-decoration: none;
+	font-size: 1.1rem;
+	color: var(--main-color);
+}
+
+/* Button for navigation */
+.btn {
+	color: white;
+	padding: 10px 20px;
+	background-color: var(--main-color);
+	border-radius: 5px;
+	text-transform: uppercase;
+}
+
+footer {
+	margin-top: 50px;
+	text-align: center;
+}
+
+/* General Styling - End */
+
+.menu {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-basis: 25%;
+	text-align: center;
+}
+
+.menu a {
+	display: block;
+	flex: 1;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.hero {
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: url('./images/ben-white-mO9vKbG5csg-unsplash.jpg') no-repeat
+		center center;
+	color: white;
+}
+
+.hero h2 {
+	font-size: 1.8rem;
+}
+
+.about-section {
+	padding: 5% 20%;
+	min-height: 300px;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 30px;
+	align-items: center;
+	border: 1px solid red;
+}
+
+.about-section-left {
+	border: 1px solid red;
+}
+
+.about-section-left img {
+	width: 100%;
+}
+
+.about-section-right {
 }
