@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+/* Mobile first */
+/* Tablet min-width 768px*/
+/* Desktop */
+
 /* Variables */
 :root {
 	--main-color: #0a0a0a;
@@ -18,10 +22,14 @@ body {
 }
 
 nav {
-	display: flex;
-	justify-content: space-around;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	text-align: center;
+}
+
+ul {
+	padding: 0;
+	list-style-type: none;
 }
 
 a {
@@ -55,22 +63,19 @@ footer {
 /* General Styling - End */
 
 .menu {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-basis: 25%;
+	display: block;
 	text-align: center;
 }
 
 .menu a {
 	display: block;
-	flex: 1;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
 .hero {
 	height: 80vh;
+	margin-bottom: 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -80,21 +85,33 @@ footer {
 	color: white;
 }
 
+.hero h1 {
+	text-align: center;
+	font-weight: 500;
+	line-height: 150%;
+}
+
 .hero h2 {
 	font-size: 1.8rem;
 }
 
 .about-section {
-	padding: 5% 20%;
+	margin-bottom: 80px;
+	padding: 10px;
+	min-width: 200px;
 	min-height: 300px;
-	display: grid;
-	grid-template-columns: 1fr 2fr;
-	gap: 30px;
-	align-items: center;
+}
+
+.about-section .btn {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 200px;
 }
 
 .about-section-left img {
-	width: 100%;
+	max-width: 100%;
 }
 
 .about-section-right p {
@@ -117,9 +134,7 @@ footer {
 }
 
 .item-list {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	gap: 30px;
+	display: block;
 	margin-top: 40px;
 	margin-bottom: 40px;
 }
