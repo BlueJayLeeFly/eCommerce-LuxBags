@@ -73,6 +73,22 @@ footer {
 	padding-bottom: 10px;
 }
 
+.cart-icon {
+	position: relative;
+}
+
+.item-number {
+	background-color: blueviolet;
+	position: absolute;
+	top: -20px;
+	left: 20px;
+	z-index: 999;
+	color: white;
+	border-radius: 50%;
+	font-size: 0.8rem;
+	padding: 2px 9px;
+}
+
 .hero {
 	height: 80vh;
 	margin-bottom: 20px;
@@ -142,6 +158,7 @@ footer {
 .item-card {
 	border: 1px solid var(--item-card-border-color);
 	padding: 30px;
+	margin-bottom: 20px;
 }
 
 .item-card img {
@@ -151,4 +168,12 @@ footer {
 .item-card .btn {
 	text-align: center;
 	display: block;
+}
+
+@media screen and (min-width: 1200px) {
+	.item-list {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		gap: 25px;
+	}
 }
