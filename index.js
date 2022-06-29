@@ -8,7 +8,6 @@ const reloadProducts = () => {
 	let products = localStorage.getItem('cart');
 	products = JSON.parse(products);
 	if (products) {
-		console.log(products.length);
 		numOfItem.textContent = products.length;
 		return products;
 	}
@@ -39,8 +38,10 @@ for (const item of addToCart) {
 		// Get object of the item with name and price
 		const itemInfo = parseItemInfo(item.parentNode.children);
 
+		console.log({ ...itemInfo, quantity: 1 });
+
 		// Save in localStorage
-		itemsInCart.push(itemInfo);
+		itemsInCart.push({ ...itemInfo, quantity: 1 });
 		localStorage.setItem('cart', JSON.stringify(itemsInCart));
 
 		// // update quantity of items in the cart
