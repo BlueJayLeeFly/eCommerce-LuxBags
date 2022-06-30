@@ -17,14 +17,14 @@ const reloadProducts = () => {
 	products = JSON.parse(products);
 	if (products) {
 		numOfItem.textContent = getTotalInCart(products);
-		return products;
+	} else {
+		products = [];
 	}
+	return products;
 };
 
 //
-if (reloadProducts()) {
-	itemsInCart = reloadProducts();
-}
+itemsInCart = reloadProducts();
 
 // Take out $ and convert to int
 const parsePrice = (priceWithDollarSign) => {
