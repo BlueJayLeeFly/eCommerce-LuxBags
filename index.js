@@ -3,17 +3,28 @@ const numOfItem = document.querySelector('.item-number');
 
 let itemsInCart = [];
 
-// ** function reload localStorage
+const getTotalInCart = (cart) => {
+	let sum = 0;
+	for (const item of cart) {
+		sum += item.quantity;
+	}
+	return sum;
+};
+
+// function reload localStorage
 const reloadProducts = () => {
 	let products = localStorage.getItem('cart');
 	products = JSON.parse(products);
 	if (products) {
-		numOfItem.textContent = products.length;
+		numOfItem.textContent = getTotalInCart(products);
 		return products;
 	}
 };
 
-itemsInCart = reloadProducts();
+//
+if (reloadProducts()) {
+	itemsInCart = reloadProducts();
+}
 
 // Take out $ and convert to int
 const parsePrice = (priceWithDollarSign) => {
@@ -31,20 +42,26 @@ const parseItemInfo = (node) => {
 // Loop an array of addToCart buttons
 for (const item of addToCart) {
 	item.addEventListener('click', (e) => {
-		// rest operator
-
 		// Get object of the item with name and price
 		const itemInfo = parseItemInfo(item.parentNode.children);
 
-		console.log({ ...itemInfo, quantity: 1 });
+		// Expand item with quantity
+		const itemInfoWithQuantity = { ...itemInfo, quantity: 1 };
 
-		// Save in localStorage
-		if (itemsInCart) {
-			itemsInCart.push({ ...itemInfo, quantity: 1 });
-			localStorage.setItem('cart', JSON.stringify(itemsInCart));
+		// Find a match in the cart array
+		const isFound = itemsInCart.find(
+			(item) => item.name === itemInfoWithQuantity.name
+		);
+
+		if (isFound) {
+			isFound.quantity++;
+		} else {
+			// Save in localStorage
+			itemsInCart.push(itemInfoWithQuantity);
 		}
 
-		// // update quantity of items in the cart
-		numOfItem.textContent = itemsInCart.length;
+		localStorage.setItem('cart', JSON.stringify(itemsInCart));
+
+		numOfItem.textContent = getTotalInCart(itemsInCart);
 	});
 }
