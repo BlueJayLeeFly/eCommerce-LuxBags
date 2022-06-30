@@ -37,6 +37,9 @@ a {
 	font-size: 1.1rem;
 	color: var(--main-color);
 }
+button {
+	cursor: pointer;
+}
 
 .text-link {
 	text-decoration: underline;

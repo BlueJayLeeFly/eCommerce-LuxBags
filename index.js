@@ -13,9 +13,7 @@ const reloadProducts = () => {
 	}
 };
 
-if (reloadProducts()) {
-	itemsInCart = reloadProducts();
-}
+itemsInCart = reloadProducts();
 
 // Take out $ and convert to int
 const parsePrice = (priceWithDollarSign) => {
@@ -41,8 +39,10 @@ for (const item of addToCart) {
 		console.log({ ...itemInfo, quantity: 1 });
 
 		// Save in localStorage
-		itemsInCart.push({ ...itemInfo, quantity: 1 });
-		localStorage.setItem('cart', JSON.stringify(itemsInCart));
+		if (itemsInCart) {
+			itemsInCart.push({ ...itemInfo, quantity: 1 });
+			localStorage.setItem('cart', JSON.stringify(itemsInCart));
+		}
 
 		// // update quantity of items in the cart
 		numOfItem.textContent = itemsInCart.length;
