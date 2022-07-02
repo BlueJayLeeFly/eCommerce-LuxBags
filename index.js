@@ -3,6 +3,8 @@ const numOfItem = document.querySelector('.item-number');
 
 let itemsInCart = [];
 
+let cartTotalCost = 0;
+
 const getTotalInCart = (cart) => {
 	let sum = 0;
 	for (const item of cart) {
@@ -23,7 +25,6 @@ const reloadProducts = () => {
 	return products;
 };
 
-//
 itemsInCart = reloadProducts();
 
 // Take out $ and convert to int
@@ -34,6 +35,7 @@ const parsePrice = (priceWithDollarSign) => {
 // Create object of item info
 const parseItemInfo = (node) => {
 	return {
+		img: node[0].currentSrc,
 		name: node[1].innerText,
 		price: parsePrice(node[2].innerText),
 	};
