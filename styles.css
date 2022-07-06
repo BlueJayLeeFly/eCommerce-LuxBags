@@ -171,6 +171,19 @@ footer {
 	display: block;
 }
 
+/* Cart grid */
+.items-in-cart li {
+	display: grid;
+	align-items: center;
+	border-top: 1px solid var(--main-color);
+	padding: 15px;
+	grid-template-columns: 1fr 1fr 2fr 1fr 1fr 1fr;
+}
+
+.items-in-cart li img {
+	width: 150px;
+}
+
 @media screen and (min-width: 768px) {
 	nav {
 		display: flex;

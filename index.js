@@ -67,3 +67,37 @@ for (const item of addToCart) {
 		numOfItem.textContent = getTotalInCart(itemsInCart);
 	});
 }
+
+// TEST
+
+const listInCartPage = document.querySelector('.items-in-cart');
+
+itemsInCart.map((item) => {
+	// all element in one div??
+	let li = document.createElement('li');
+
+	let deleteBtn = document.createElement('div');
+	let itemImg = document.createElement('img');
+	let itemName = document.createElement('div');
+	let itemPrice = document.createElement('div');
+	let quantity = document.createElement('div');
+	let itemPriceTotal = document.createElement('div');
+
+	deleteBtn.textContent = 'Delete'; // add icon like itemIgm.src
+	itemImg.src = item.img;
+	itemName.textContent = item.name;
+	itemPrice.textContent = item.price;
+	quantity.textContent = item.quantity;
+	itemPriceTotal.textContent = item.price * item.quantity;
+
+	listInCartPage.appendChild(li);
+
+	// check if I can add multiple children
+
+	li.appendChild(deleteBtn);
+	li.appendChild(itemImg);
+	li.appendChild(itemName);
+	li.appendChild(itemPrice);
+	li.appendChild(quantity);
+	li.appendChild(itemPriceTotal);
+});
