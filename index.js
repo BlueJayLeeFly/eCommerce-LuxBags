@@ -73,6 +73,9 @@ for (const item of addToCart) {
 const listInCartPage = document.querySelector('.items-in-cart');
 
 itemsInCart.map((item) => {
+	const index = itemsInCart.indexOf(item);
+
+	// 1. Create elements
 	let li = document.createElement('li');
 
 	let deleteBtn = document.createElement('img');
@@ -87,6 +90,7 @@ itemsInCart.map((item) => {
 
 	let itemPriceTotal = document.createElement('div');
 
+	// 2. Set attributes
 	deleteBtn.setAttribute('src', './images/c-remove.svg');
 	deleteBtn.classList.add('remove-btn');
 
@@ -103,6 +107,7 @@ itemsInCart.map((item) => {
 
 	itemPriceTotal.textContent = item.price * item.quantity;
 
+	// 3. Append elements
 	quantityWrapper.append(minusBtn, quantity, plusBtn);
 	listInCartPage.appendChild(li);
 
@@ -115,19 +120,37 @@ itemsInCart.map((item) => {
 		itemPriceTotal
 	);
 
+	// 4. Event click
 	deleteBtn.addEventListener('click', () => {
+		itemsInCart.splice(index, 1);
+		localStorage.setItem('cart', JSON.stringify(itemsInCart));
+
 		listInCartPage.removeChild(li);
+		numOfItem.textContent = getTotalInCart(itemsInCart);
 	});
 
 	plusBtn.addEventListener('click', () => {
 		item.quantity++;
 		quantity.textContent = item.quantity;
 		itemPriceTotal.textContent = item.price * item.quantity;
+
+		localStorage.setItem('cart', JSON.stringify(itemsInCart));
+		numOfItem.textContent = getTotalInCart(itemsInCart);
 	});
 
 	minusBtn.addEventListener('click', () => {
-		item.quantity--;
+		if (item.quantity === 1) {
+			listInCartPage.removeChild(li);
+			itemsInCart.splice(index, 1);
+			localStorage.setItem('cart', JSON.stringify(itemsInCart));
+			numOfItem.textContent = getTotalInCart(itemsInCart);
+		} else {
+			item.quantity--;
+		}
 		quantity.textContent = item.quantity;
 		itemPriceTotal.textContent = item.price * item.quantity;
+
+		localStorage.setItem('cart', JSON.stringify(itemsInCart));
+		numOfItem.textContent = getTotalInCart(itemsInCart);
 	});
 });
