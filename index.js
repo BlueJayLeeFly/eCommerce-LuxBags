@@ -68,36 +68,66 @@ for (const item of addToCart) {
 	});
 }
 
-// TEST
+// Cart Page
 
 const listInCartPage = document.querySelector('.items-in-cart');
 
 itemsInCart.map((item) => {
-	// all element in one div??
 	let li = document.createElement('li');
 
-	let deleteBtn = document.createElement('div');
+	let deleteBtn = document.createElement('img');
 	let itemImg = document.createElement('img');
 	let itemName = document.createElement('div');
 	let itemPrice = document.createElement('div');
-	let quantity = document.createElement('div');
+
+	let quantityWrapper = document.createElement('div');
+	let plusBtn = document.createElement('img');
+	let quantity = document.createElement('span');
+	let minusBtn = document.createElement('img');
+
 	let itemPriceTotal = document.createElement('div');
 
-	deleteBtn.textContent = 'Delete'; // add icon like itemIgm.src
-	itemImg.src = item.img;
+	deleteBtn.setAttribute('src', './images/c-remove.svg');
+	deleteBtn.classList.add('remove-btn');
+
+	itemImg.setAttribute('src', item.img);
 	itemName.textContent = item.name;
 	itemPrice.textContent = item.price;
+
+	quantityWrapper.classList.add('quantityWrapper');
+	plusBtn.setAttribute('src', './images/circle-caret-right.svg');
+	plusBtn.classList.add('plus-btn');
+	minusBtn.setAttribute('src', './images/circle-caret-left.svg');
+	minusBtn.classList.add('minus-btn');
 	quantity.textContent = item.quantity;
+
 	itemPriceTotal.textContent = item.price * item.quantity;
 
+	quantityWrapper.append(minusBtn, quantity, plusBtn);
 	listInCartPage.appendChild(li);
 
-	// check if I can add multiple children
+	li.append(
+		deleteBtn,
+		itemImg,
+		itemName,
+		itemPrice,
+		quantityWrapper,
+		itemPriceTotal
+	);
 
-	li.appendChild(deleteBtn);
-	li.appendChild(itemImg);
-	li.appendChild(itemName);
-	li.appendChild(itemPrice);
-	li.appendChild(quantity);
-	li.appendChild(itemPriceTotal);
+	deleteBtn.addEventListener('click', () => {
+		listInCartPage.removeChild(li);
+	});
+
+	plusBtn.addEventListener('click', () => {
+		item.quantity++;
+		quantity.textContent = item.quantity;
+		itemPriceTotal.textContent = item.price * item.quantity;
+	});
+
+	minusBtn.addEventListener('click', () => {
+		item.quantity--;
+		quantity.textContent = item.quantity;
+		itemPriceTotal.textContent = item.price * item.quantity;
+	});
 });
