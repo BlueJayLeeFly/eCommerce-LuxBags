@@ -1,8 +1,9 @@
 const addToCart = document.querySelectorAll('.add-to-cart');
 const numOfItem = document.querySelector('.item-number');
+const listInCartPage = document.querySelector('.items-in-cart');
+const totalInCart = document.querySelector('.cart-total');
 
 let itemsInCart = [];
-
 let cartTotalCost = 0;
 
 const getTotalInCart = (cart) => {
@@ -70,8 +71,6 @@ for (const item of addToCart) {
 
 // Cart Page
 
-const listInCartPage = document.querySelector('.items-in-cart');
-
 itemsInCart.map((item) => {
 	const index = itemsInCart.indexOf(item);
 
@@ -96,7 +95,7 @@ itemsInCart.map((item) => {
 
 	itemImg.setAttribute('src', item.img);
 	itemName.textContent = item.name;
-	itemPrice.textContent = item.price;
+	itemPrice.textContent = `$${item.price.toFixed(2)}`;
 
 	quantityWrapper.classList.add('quantityWrapper');
 	plusBtn.setAttribute('src', './images/circle-caret-right.svg');
@@ -105,7 +104,10 @@ itemsInCart.map((item) => {
 	minusBtn.classList.add('minus-btn');
 	quantity.textContent = item.quantity;
 
-	itemPriceTotal.textContent = item.price * item.quantity;
+	itemPriceTotal.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+
+	cartTotalCost += item.price * item.quantity;
+	totalInCart.textContent = `$${cartTotalCost.toFixed(2)}`;
 
 	// 3. Append elements
 	quantityWrapper.append(minusBtn, quantity, plusBtn);
@@ -125,6 +127,9 @@ itemsInCart.map((item) => {
 		itemsInCart.splice(index, 1);
 		localStorage.setItem('cart', JSON.stringify(itemsInCart));
 
+		cartTotalCost -= item.price * item.quantity;
+		totalInCart.textContent = `$${cartTotalCost.toFixed(2)}`;
+
 		listInCartPage.removeChild(li);
 		numOfItem.textContent = getTotalInCart(itemsInCart);
 	});
@@ -136,21 +141,22 @@ itemsInCart.map((item) => {
 
 		localStorage.setItem('cart', JSON.stringify(itemsInCart));
 		numOfItem.textContent = getTotalInCart(itemsInCart);
+
+		cartTotalCost += item.price;
+		totalInCart.textContent = `$${cartTotalCost.toFixed(2)}`;
 	});
 
 	minusBtn.addEventListener('click', () => {
-		if (item.quantity === 1) {
-			listInCartPage.removeChild(li);
-			itemsInCart.splice(index, 1);
-			localStorage.setItem('cart', JSON.stringify(itemsInCart));
-			numOfItem.textContent = getTotalInCart(itemsInCart);
-		} else {
+		if (item.quantity > 1) {
 			item.quantity--;
+			cartTotalCost -= item.price;
 		}
 		quantity.textContent = item.quantity;
 		itemPriceTotal.textContent = item.price * item.quantity;
 
 		localStorage.setItem('cart', JSON.stringify(itemsInCart));
 		numOfItem.textContent = getTotalInCart(itemsInCart);
+
+		totalInCart.textContent = `$${cartTotalCost.toFixed(2)}`;
 	});
 });

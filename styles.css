@@ -172,8 +172,22 @@ footer {
 }
 
 /* Cart grid */
+.items-in-cart-section {
+	max-width: 1000px;
+	margin: 100px auto;
+}
+
+.cart-header {
+	display: grid;
+	gap: 10px;
+	align-items: center;
+	padding: 15px;
+	grid-template-columns: 6fr 2fr 3fr 1fr;
+}
+
 .items-in-cart li {
 	display: grid;
+	gap: 10px;
 	align-items: center;
 	border-top: 1px solid var(--main-color);
 	padding: 15px;
@@ -193,6 +207,16 @@ footer {
 .minus-btn {
 	width: 32px;
 	height: 32px;
+}
+
+.cart-total-wrapper {
+	width: 300px;
+	margin: 50px 30px 30px auto;
+	display: flex;
+	justify-content: end;
+	gap: 20px;
+	font-size: 1.8rem;
+	font-weight: 600;
 }
 
 @media screen and (min-width: 768px) {
