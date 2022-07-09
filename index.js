@@ -137,7 +137,7 @@ itemsInCart.map((item) => {
 	plusBtn.addEventListener('click', () => {
 		item.quantity++;
 		quantity.textContent = item.quantity;
-		itemPriceTotal.textContent = item.price * item.quantity;
+		itemPriceTotal.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
 
 		localStorage.setItem('cart', JSON.stringify(itemsInCart));
 		numOfItem.textContent = getTotalInCart(itemsInCart);
@@ -152,7 +152,7 @@ itemsInCart.map((item) => {
 			cartTotalCost -= item.price;
 		}
 		quantity.textContent = item.quantity;
-		itemPriceTotal.textContent = item.price * item.quantity;
+		itemPriceTotal.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
 
 		localStorage.setItem('cart', JSON.stringify(itemsInCart));
 		numOfItem.textContent = getTotalInCart(itemsInCart);
