@@ -1,79 +1,15 @@
-const addToCart = document.querySelectorAll('.add-to-cart');
-const numOfItem = document.querySelector('.item-number');
-const listInCartPage = document.querySelector('.items-in-cart');
-const totalInCart = document.querySelector('.cart-total');
+import { numOfItem, listInCartPage, totalInCart } from './elements.js';
+
+import { getTotalInCart, reloadProducts } from './utils.js';
 
 let itemsInCart = [];
 let cartTotalCost = 0;
 
-const getTotalInCart = (cart) => {
-	let sum = 0;
-	for (const item of cart) {
-		sum += item.quantity;
-	}
-	return sum;
-};
-
-// function reload localStorage
-const reloadProducts = () => {
-	let products = localStorage.getItem('cart');
-	products = JSON.parse(products);
-	if (products) {
-		numOfItem.textContent = getTotalInCart(products);
-	} else {
-		products = [];
-	}
-	return products;
-};
-
 itemsInCart = reloadProducts();
-
-// Take out $ and convert to int
-const parsePrice = (priceWithDollarSign) => {
-	return Number(priceWithDollarSign.substring(2));
-};
-
-// Create object of item info
-const parseItemInfo = (node) => {
-	return {
-		img: node[0].currentSrc,
-		name: node[1].innerText,
-		price: parsePrice(node[2].innerText),
-	};
-};
-
-// Loop an array of addToCart buttons
-for (const item of addToCart) {
-	item.addEventListener('click', (e) => {
-		// Get object of the item with name and price
-		const itemInfo = parseItemInfo(item.parentNode.children);
-
-		// Expand item with quantity
-		const itemInfoWithQuantity = { ...itemInfo, quantity: 1 };
-
-		// Find a match in the cart array
-		const isFound = itemsInCart.find(
-			(item) => item.name === itemInfoWithQuantity.name
-		);
-
-		if (isFound) {
-			isFound.quantity++;
-		} else {
-			// Save in localStorage
-			itemsInCart.push(itemInfoWithQuantity);
-		}
-
-		localStorage.setItem('cart', JSON.stringify(itemsInCart));
-
-		numOfItem.textContent = getTotalInCart(itemsInCart);
-	});
-}
 
 // Cart Page
 
 itemsInCart.map((item) => {
-	const index = itemsInCart.indexOf(item);
-
 	// 1. Create elements
 	let li = document.createElement('li');
 
@@ -124,6 +60,8 @@ itemsInCart.map((item) => {
 
 	// 4. Event click
 	deleteBtn.addEventListener('click', () => {
+		const index = itemsInCart.indexOf(item);
+
 		itemsInCart.splice(index, 1);
 		localStorage.setItem('cart', JSON.stringify(itemsInCart));
 
